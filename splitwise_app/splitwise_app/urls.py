@@ -16,7 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from core.views import create_user_api, create_grp_api, add_group_member_api,get_all
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("api/users/all", get_all),
+    path("api/users/", create_user_api),
+    path("api/groups/", create_grp_api),
+    path("api/groups/add-member/", add_group_member_api),
+
+
+
+
 ]
