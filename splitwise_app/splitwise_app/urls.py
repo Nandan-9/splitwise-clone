@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import create_user_api, create_grp_api, add_group_member_api,get_all
+from core.views import create_user_api, create_grp_api, add_group_member_api,get_all,add_expense,get_group_balances,record_settlement_api,simplify_balances,user_summary_api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +24,14 @@ urlpatterns = [
     path("api/users/", create_user_api),
     path("api/groups/", create_grp_api),
     path("api/groups/add-member/", add_group_member_api),
+    path("api/groups/<uuid:group_id>/expenses/", add_expense),
+    path("api/groups/<uuid:group_id>/balances/", get_group_balances,name="group-balances"),
+    path("api/groups/<uuid:group_id>/settlements/",record_settlement_api,name="record-settlement"),
+    path("/api/groups/<uuid:group_id>/debts/",simplify_balances),
+    path("/api/groups/<uuid:group_id>/users/<uuid:group_id>/summary/",user_summary_api),
+
+
+
 
 
 

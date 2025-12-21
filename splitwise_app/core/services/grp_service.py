@@ -1,6 +1,6 @@
 
 
-from core.models import Group, User, GroupMember
+from core.models import Group, User, GroupMember,Balance
 from django.db import IntegrityError
 from django.db import transaction
 
@@ -29,5 +29,10 @@ def create_group(*, created_by: User, members) -> Group:
                 group=group,
                 user=member
             )
+        Balance.objects.bulk_create([
+        Balance(group=group, user=user, balance=0)
+        for user in members
+        ])
+
     
     return group
